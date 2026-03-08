@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JalRaksha – GenAI Disaster Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg-gNBhn3Q4RXAXW1CqLgb1DHWMtiKOIA&libraries=visualization&callback=initMap" async defer></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-content">
+      <h1>🌊 JalRaksha – AI Flood Alert & SOS</h1>
+      <div class="alert-banner" id="alert"></div>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <section class="left-panel">
+      <div id="map" class="map"></div>
+      <button class="gps-btn" onclick="detectLocation()">📍 Use My Location</button>
+    </section>
+
+    <!-- RIGHT PANEL -->
+    <section class="right-panel">
+
+      <div class="card">
+        <h3>📍 Search Location</h3>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="predict()">Predict Flood Risk</button>
+      </div>
+
+      <div class="card">
+        <h3>🌧 Weather & Flood Risk</h3>
+        <p id="weather">Rainfall, Humidity, Temperature</p>
+        <p id="risk">Flood Risk</p>
+      </div>
+
+      <div class="card">
+        <h3>📊 6-hour Rainfall Forecast</h3>
+        <canvas id="chart" height="200"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>🏠 Emergency Shelters</h3>
+        <p>Blue markers on the map show nearby shelters.</p>
+      </div>
+
+      <div class="card sos">
+        <h3>🆘 Emergency SOS</h3>
+        <button onclick="sendSMS()">Send Emergency SMS Alert</button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- EXTRA FEATURES -->
+  <div class="after-all-section">
+
+    <!-- Historical Flood Data -->
+    <div class="card">
+      <h3>📜 Historical Flood Data</h3>
+      <table>
+        <tr><th>Year</th><th>City</th><th>Severity</th></tr>
+        <tr><td>2022</td><td>Guwahati</td><td>High</td></tr>
+        <tr><td>2021</td><td>Patna</td><td>Moderate</td></tr>
+        <tr><td>2020</td><td>Lucknow</td><td>Low</td></tr>
+      </table>
+    </div>
+
+    <!-- Recent Alerts -->
+    <div class="card">
+      <h3>⏱ Recent Alerts</h3>
+      <ul class="timeline">
+        <li>03 Mar 2026 – Guwahati – Severe</li>
+        <li>02 Mar 2026 – Patna – High</li>
+        <li>01 Mar 2026 – Delhi – Low</li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="card">
+      <h3>🛟 Resources & Shelters</h3>
+      <ul>
+        <li><a href="https://ndma.gov.in/" target="_blank">NDMA Disaster Guidelines</a></li>
+        <li><a href="https://www.india.gov.in/topics/disaster-management" target="_blank">Government Disaster Portal</a></li>
+        <li><a href="https://www.indiahelpline.gov.in" target="_blank">National Helpline Directory</a></li>
+      </ul>
+    </div>
+
+    <!-- Satellite Weather Radar -->
+    <div class="card">
+      <h3>🛰 Satellite Weather Radar</h3>
+      <iframe src="https://embed.windy.com/embed2.html?lat=20.5937&lon=78.9629&zoom=5&level=surface&overlay=rain&product=ecmwf&menu=false&message=false&marker=false&calendar=now&pressure=false&type=map" width="100%" height="250" frameborder="0"></iframe>
+    </div>
+
+    <!-- Flood Report Form -->
+    <div class="card">
+      <h3>📝 Report Local Flood</h3>
+      <form onsubmit="submitReport(event)" id="reportForm">
+        <input type="text" id="reportCity" placeholder="City" required>
+        <textarea id="reportDesc" placeholder="Describe flood situation" required></textarea>
+        <input type="file" id="reportImage">
+        <button type="submit">Submit Report</button>
+      </form>
+    </div>
+
+    <!-- Share Alert -->
+    <div class="card">
+      <h3>🔗 Share Flood Alert</h3>
+      <button onclick="shareWhatsApp()">WhatsApp</button>
+      <button onclick="shareTwitter()">Twitter</button>
+      <button onclick="shareFacebook()">Facebook</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="card footer">
+      <p>Developed by <strong>Sivangaraj Borah</strong></p>
+      <p>AI for Bharat Hackathon 2026</p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
